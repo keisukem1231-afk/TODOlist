@@ -17,6 +17,7 @@
         </button>
         
         
+        
     </div>
 
     <ul id="list" class="space-y-2 list-disc list-inside"></ul>
@@ -34,12 +35,24 @@
             return;
         }
 
+
         const item = document.createElement("li");
-        item.className = "flex items-center justify-between bg-gray-100 p-2 rounded-lg shadow";
+        item.className = "justify-end flex items-center bg-gray-100 p-2 rounded-lg shadow";
         //ここにjustify-betweenを入れた
 
         const span = document.createElement("span");
         span.textContent = text;
+        
+
+        const delButton = document.createElement("button");
+        delButton.textContent = "削除";
+        delButton.className = "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-4"
+        delButton.addEventListener("click", () => {
+            // 確認ダイアログはAI使用
+            const confirmed = confirm("本当に削除しますか？");
+            if (confirmed) {
+            item.remove();
+        }});
 
         const finButton = document.createElement("button");
         finButton.textContent = "完了";
@@ -52,6 +65,7 @@
 
         item.appendChild(span);
         item.appendChild(finButton);
+        item.appendChild(delButton);
         list.appendChild(item);
 
         todoInput.value = "";
