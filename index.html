@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODOリスト</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white px-16 py-8">
+    <h1 class="font-bold text-3xl mb-8 text-center mx-auto">TODOList</h1>
+    <div class="flex gap-2 mb-6 items-center rounded-lg p-8 bg-white border border-gray-300 shadow mx-auto">
+        <div class="bg-white shadow border-4 border-blue-300 shadow p-4 rounded-lg mb-4">
+            <input id="todoinput" type="text" placeholder="タスクを入力..." class="font-bold text-xl">
+        </div>
+        <button id="addbutton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            追加
+        </button>
+        
+        
+        
+    </div>
+
+    <ul id="list" class="space-y-2 list-disc list-inside"></ul>
+    <!--list-discとlist-insideはAI使用-->
+
+    <script>
+    const addButton = document.querySelector("#addbutton");
+    const todoInput = document.querySelector("#todoinput");
+    const list = document.querySelector("#list");
+    
+    addButton.addEventListener("click", () => {
+        const text = todoInput.value;
+//ここに})を付けていた
+        if (text === "") {
+            return;
+        }
+
+
+        const item = document.createElement("li");
+        item.className = "justify-end flex items-center bg-gray-100 p-2 rounded-lg shadow";
+        //ここにjustify-betweenを入れた
+
+        const span = document.createElement("span");
+        span.textContent = text;
+        
+
+        const delButton = document.createElement("button");
+        delButton.textContent = "削除";
+        delButton.className = "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-4"
+        delButton.addEventListener("click", () => {
+            // 確認ダイアログはAI使用
+            const confirmed = confirm("本当に削除しますか？");
+            if (confirmed) {
+            item.remove();
+        }});
+
+        const finButton = document.createElement("button");
+        finButton.textContent = "完了";
+        finButton.className = "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4"
+        //ml-4を入れた
+        finButton.addEventListener("click", () => {
+            span.classList.toggle("line-through");
+            span.classList.toggle("text-gray-400");
+        });
+
+        item.appendChild(span);
+        item.appendChild(finButton);
+        item.appendChild(delButton);
+        list.appendChild(item);
+
+        todoInput.value = "";
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
